@@ -8,6 +8,50 @@ depends on [vas-http](https://github.com/ahdinosaur/vas-http)
 npm install --save vas-assets
 ```
 
+## example
+
+```js
+const { join } = require('path')
+const combine = require('depject')
+const Log = require('catstack-log')
+const Http = require('vas-http')
+const Assets = require('vas-assets')
+
+const Config = {
+  gives: {
+    config: {
+      vas: {
+        assets: {
+          entryFile: true
+        }
+      }
+    }
+  },
+  create: () => ({
+    config: {
+      vas: {
+        assets: {
+          entryFile: () => {
+            return join(__dirname, '/client.js')
+          }
+        }
+      }
+    }
+  })
+}
+
+const modules = {
+  Config,
+  Log,
+  Http,
+  Assets
+}
+
+const sockets = combine(modules)
+
+sockets.vas.start.map(s => s())
+```
+
 ## usage
 
 ### `vasAssets = require('vas-assets')`
