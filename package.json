@@ -41,6 +41,7 @@
     "vas-http": "github:ahdinosaur/vas-http"
   },
   "dependencies": {
+    "accepts": "^1.3.3",
     "bankai": "^5.2.1",
     "es2040": "^1.2.3"
   }

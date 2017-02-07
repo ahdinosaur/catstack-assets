@@ -1,5 +1,7 @@
+const { assign } = Object
 const Url = require('url')
 const Assets = require('bankai')
+const Accept = require('accepts')
 
 module.exports = {
   needs: {
@@ -57,9 +59,16 @@ module.exports = {
       const config = api.config.vas.assets
       const entryFile = config.entryFile()
       const options = {
-        js: config.js(),
+        js: assign(config.js() || {}, {
+          debug: process.env.NODE_ENV !== 'production'
+        }),
         css: config.css(),
-        html: config.html(),
+        html: assign(config.html() || {}, {
+          head: `
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <base href="/">
+          `
+        }),
         optimize: config.optimize()
       }
 
@@ -69,6 +78,7 @@ module.exports = {
         // TODO add this to context in vas
         // for all http handlers
         const url = Url.parse(req.url)
+        const accept = Accept(req)
 
         switch (url.pathname) {
           case '/':
@@ -77,9 +87,14 @@ module.exports = {
             return next(null, assets.js(req, res))
           case '/bundle.css':
             return next(null, assets.css(req, res))
-          default:
-            return next(null)
         }
+
+        switch (accept.type(['html'])) {
+          case 'html':
+            return next(null, assets.html(req, res))
+        }
+
+        return next(null)
       }
     }
   }
