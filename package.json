@@ -1,6 +1,6 @@
 {
   "name": "catstack-assets",
-  "version": "0.0.0",
+  "version": "1.0.0-pre.0",
   "description": "asset handler and compiler for catstack",
   "main": "index.js",
   "scripts": {
