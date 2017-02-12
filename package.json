@@ -1,7 +1,7 @@
 {
-  "name": "vas-assets",
+  "name": "catstack-assets",
   "version": "0.0.0",
-  "description": "asset handler and compiler for vas-http",
+  "description": "asset handler and compiler for catstack",
   "main": "index.js",
   "scripts": {
     "start": "node-dev example/server",
@@ -19,15 +19,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ahdinosaur/vas-assets.git"
+    "url": "git+https://github.com/ahdinosaur/catstack-assets.git"
   },
   "keywords": [],
   "author": "Mikey <michael.williams@enspiral.com> (http://dinosaur.is)",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/ahdinosaur/vas-assets/issues"
+    "url": "https://github.com/ahdinosaur/catstack-assets/issues"
   },
-  "homepage": "https://github.com/ahdinosaur/vas-assets#readme",
+  "homepage": "https://github.com/ahdinosaur/catstack-assets#readme",
   "devDependencies": {
     "catstack-log": "github:catstack/catstack-log",
     "dependency-check": "^2.7.0",
@@ -38,7 +38,7 @@
     "run-default": "^1.0.0",
     "standard": "^8.6.0",
     "tape": "^4.6.3",
-    "vas-http": "github:ahdinosaur/vas-http"
+    "catstack": "github:enspiral-root-systems/catstack"
   },
   "dependencies": {
     "accepts": "^1.3.3",

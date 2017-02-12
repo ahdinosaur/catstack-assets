@@ -1,62 +1,51 @@
 const { assign } = Object
-const Url = require('url')
 const Assets = require('bankai')
 const Accept = require('accepts')
 
 module.exports = {
   needs: {
     config: {
-      vas: {
-        assets: {
-          entryFile: 'first',
-          // TODO these should probably be
-          // nested plugs not object plugs.
-          js: 'first',
-          css: 'first',
-          html: 'first',
-          optimize: 'first'
-        }
+      assets: {
+        entryFile: 'first',
+        // TODO these should probably be
+        // nested plugs not object plugs.
+        js: 'first',
+        css: 'first',
+        html: 'first',
+        optimize: 'first'
       }
     }
   },
   gives: {
     config: {
-      vas: {
-        assets: {
-          js: true,
-          css: true,
-          html: true,
-          optimize: true
-        }
+      assets: {
+        js: true,
+        css: true,
+        html: true,
+        optimize: true
       }
     },
-    vas: {
-      http: {
-        handler: true
-      }
+    http: {
+      handler: true
     }
   },
   create: (api) => {
     return {
       config: {
-        vas: {
-          assets: {
-            js: () => {},
-            css: () => {},
-            html: () => {},
-            optimize: () => {}
-          }
+        assets: {
+          js: () => {},
+          css: () => {},
+          html: () => {},
+          optimize: () => {}
         }
       },
-      vas: {
-        http: {
-          handler
-        }
+      http: {
+        handler
       }
     }
 
     function handler () {
-      const config = api.config.vas.assets
+      const config = api.config.assets
       const entryFile = config.entryFile()
       const options = {
         js: assign(config.js() || {}, {
@@ -75,12 +64,9 @@ module.exports = {
       const assets = Assets(entryFile, options)
 
       return (req, res, context, next) => {
-        // TODO add this to context in vas
-        // for all http handlers
-        const url = Url.parse(req.url)
         const accept = Accept(req)
 
-        switch (url.pathname) {
+        switch (context.url.pathname) {
           case '/':
             return next(null, assets.html(req, res))
           case '/bundle.js':

@@ -1,26 +1,22 @@
 const { join } = require('path')
 const combine = require('depject')
 const Log = require('catstack-log')
-const Http = require('vas-http')
+const Http = require('catstack-http')
 const Assets = require('../')
 
 const Config = {
   gives: {
     config: {
-      vas: {
-        assets: {
-          entryFile: true
-        }
+      assets: {
+        entryFile: true
       }
     }
   },
   create: () => ({
     config: {
-      vas: {
-        assets: {
-          entryFile: () => {
-            return join(__dirname, '/client.js')
-          }
+      assets: {
+        entryFile: () => {
+          return join(__dirname, '/client.js')
         }
       }
     }
@@ -36,4 +32,4 @@ const modules = {
 
 const sockets = combine(modules)
 
-sockets.vas.start.map(s => s())
+sockets.server.start.map(s => s())

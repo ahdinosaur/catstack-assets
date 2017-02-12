@@ -1,11 +1,11 @@
-# vas-assets
+# catstack-assets
 
-asset handler and compiler for [vas@3.0.0-pre](https://github.com/ahdinosaur/vas/tree/v3)
+asset handler and compiler for [catstack@2.0.0-pre](https://github.com/enspiral-root-systems/catstack/tree/v3)
 
-depends on [vas-http](https://github.com/ahdinosaur/vas-http)
+depends on [catstack/modules/http](https://github.com/enspiral-root-systems/catstack)
 
 ```shell
-npm install --save vas-assets
+npm install --save catstack-assets
 ```
 
 ## example
@@ -14,13 +14,13 @@ npm install --save vas-assets
 const { join } = require('path')
 const combine = require('depject')
 const Log = require('catstack-log')
-const Http = require('vas-http')
-const Assets = require('vas-assets')
+const Http = require('catstack/modules/http')
+const Assets = require('catstack-assets')
 
 const Config = {
   gives: {
     config: {
-      vas: {
+      catstack: {
         assets: {
           entryFile: true
         }
@@ -29,7 +29,7 @@ const Config = {
   },
   create: () => ({
     config: {
-      vas: {
+      catstack: {
         assets: {
           entryFile: () => {
             return join(__dirname, '/client.js')
@@ -49,12 +49,12 @@ const modules = {
 
 const sockets = combine(modules)
 
-sockets.vas.start.map(s => s())
+sockets.catstack.start.map(s => s())
 ```
 
 ## usage
 
-### `vasAssets = require('vas-assets')`
+### `Assets = require('catstack-assets')`
 
 ## license
 
